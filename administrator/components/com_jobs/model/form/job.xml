@@ -18,15 +18,6 @@
 			description="JFIELD_ALIAS_DESC"
 			/>
 
-		<field name="parent_id"
-			type="job_modal"
-			label="COM_JOBS_PARENT_ITEM"
-			description="COM_JOBS_PARENT_ITEM_DESC"
-			show_root="true"
-			class="input-xlarge"
-			access="true"
-			/>
-
 		<field name="catid"
 			type="categoryadd"
 			label="JCATEGORY"
@@ -37,11 +28,74 @@
 			<option value="0">COM_JOBS_TITLE_UNCATEGORISED</option>
 		</field>
 
-		<field name="images"
-			type="finder"
+		<field name="images_upload"
+			type="file"
 			label="COM_JOBS_IMAGES"
 			description="COM_JOBS_IMAGES_DESC"
 			preview="true"
+			/>
+
+		<field
+			name="position"
+			type="text"
+			label="上班地點"
+			description=""
+			class="input-xxlarge"
+			default=""
+			/>
+
+		<field
+			name="type"
+			type="list"
+			label="工作類型"
+			description=""
+			class=""
+			default=""
+			>
+			<option></option>
+			<option value="full_time">正職工作</option>
+			<option value="part_time">兼職工作</option>
+			<option value="intern">實習工作</option>
+			<option value="soho">外包接案</option>
+			<option value="contract">短期約聘</option>
+		</field>
+
+		<field
+			name="salary_min"
+			type="text"
+			label="最低月薪"
+			description=""
+			class=""
+			default=""
+			/>
+
+		<field
+			name="salary_max"
+			type="text"
+			label="最高月薪"
+			description=""
+			class=""
+			default=""
+			/>
+	</fieldset>
+
+	<fieldset name="company" label="公司資訊">
+		<field
+			name="company"
+			type="text"
+			label="公司"
+			description="公司"
+			class=""
+			default=""
+			/>
+
+		<field
+			name="logo_upload"
+			type="file"
+			label="LOGO"
+			description=""
+			class=""
+			default=""
 			/>
 
 		<field name="url"
@@ -106,18 +160,18 @@
 
 	<fieldset name="text"
 		align="left">
-		<field name="introtext"
+		<field name="desc"
 			type="editor"
-			label="COM_JOBS_INTROTEXT"
+			label="詳細說明"
 			description="COM_JOBS_INTROTEXT_DESC"
 			filter="raw"
 			buttons="true"
 			hide="readmore,pagebreak,article"
 			/>
 
-		<field name="fulltext"
+		<field name="contact"
 			type="editor"
-			label="COM_JOBS_FULLTEXT"
+			label="應徵方式"
 			description="COM_JOBS_FULLTEXT_DESC"
 			filter="raw"
 			buttons="true"

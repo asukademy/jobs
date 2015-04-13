@@ -23,6 +23,7 @@ $fieldsets = $data->form->getFieldsets();
 	</div>
 
 	<div class="span4">
+		<?php echo $this->loadTemplate('fieldset', array('fieldset' => $fieldsets['company'], 'class' => 'form-horizontal')); ?>
 		<?php echo $this->loadTemplate('fieldset', array('fieldset' => $fieldsets['publish'], 'class' => 'form-horizontal')); ?>
 	</div>
 </div>

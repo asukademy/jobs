@@ -20,6 +20,7 @@ JHtmlBootstrap::tooltip();
  * @var $data      Windwalker\Data\Data
  * @var $state     Joomla\Registry\Registry
  * @var $user      \JUser
+ * @var $this      Windwalker\View\Html\ItemHtmlView
  */
 $container = $this->getContainer();
 $data      = $this->data;
@@ -73,47 +74,76 @@ $user      = $container->get('user');
 				<!--Columns-->
 				<?php if (!empty($data->items)) : ?>
 
-					<?php
-					foreach ($data->items as $key => &$item)
-					:
-						$item = new Data($item);
-					?>
-						<div class="item">
-							<?php
-							$this->item = & $item;
-							echo $this->loadTemplate('item', array('item' => $item));
-							?>
-						</div>
+					<table class="uk-table uk-table-striped">
+						<tbody>
 
-						<span class="row-separator"></span>
-						<!-- LINE END -->
+						<?php
+						foreach ($data->items as $key => &$item)
+						:
+							$item = new Data($item);
+						?>
+							<tr class="item">
+								<td>
+									<span class="uk-badge <?php echo \Jobs\Helper\TypeHelper::getTypeLabel($item->type) ?>">
+										<?php echo $this->escape(JText::_('COM_JOBS_TYPE_' . $item->type)); ?>
+									</span>
+								</td>
+								<td>
+									<a href="<?php echo \Jobs\Router\Route::_('job', ['id' => $item->id]) ?>">
+										<?php echo $this->escape($item->title); ?>
+									</a>
+								</td>
+								<td>
+									<?php if ($item->url): ?>
+									<a class="uk-text-muted" href="<?php echo $this->escape($item->url); ?>">
+										<?php echo $this->escape($item->company); ?> <span class="uk-icon-share-square-o"></span>
+									</a>
+									<?php else: ?>
+										<span class="uk-text-muted">
+											<?php echo $this->escape($item->company); ?>
+										</span>
+									<?php endif; ?>
+								</td>
 
-					<?php endforeach; ?>
+								<td>
+									<span class="uk-text-muted">
+										<i class="uk-icon-home"></i>
+										<?php echo $this->escape($item->position); ?>
+									</span>
+								</td>
+							</tr>
+
+						<?php endforeach; ?>
+
+
+						</tbody>
+					</table>
 
 				<?php endif; ?>
 				<!--Columns End-->
 
-			<!--Pagination-->
-			<?php if (($data->params->def('show_pagination', 1) == 1 || ($data->params->get('show_pagination') == 2)) && ($data->pagination->get('pages.total') > 1)) : ?>
-				<div class="pagination">
-					<?php if ($data->params->def('show_pagination_results', 1)) : ?>
-						<p class="counter">
-							<?php echo $data->pagination->getPagesCounter(); ?>
-						</p>
-					<?php endif; ?>
+				<!--Pagination-->
+				<?php if (($data->params->def('show_pagination', 1) == 1 || ($data->params->get('show_pagination') == 2)) && ($data->pagination->get('pages.total') > 1)) : ?>
+					<div class="pagination">
+						<?php if ($data->params->def('show_pagination_results', 1)) : ?>
+							<p class="counter">
+								<?php echo $data->pagination->getPagesCounter(); ?>
+							</p>
+						<?php endif; ?>
 
-					<?php echo $data->pagination->getPagesLinks(); ?>
-				</div>
-			<?php endif; ?>
-			<!--Pagination End-->
+						<?php echo $data->pagination->getPagesLinks(); ?>
+					</div>
+				<?php endif; ?>
+				<!--Pagination End-->
 
+			</div>
 		</div>
-	</div>
 
-	<div>
-		<input type="hidden" name="task" value="" />
-		<input type="hidden" name="return" id="return_url" value="<?php echo base64_encode(JUri::getInstance()->toString()); ?>" />
-		<?php echo JHtml::_('form.token'); ?>
+		<div>
+			<input type="hidden" name="task" value="" />
+			<input type="hidden" name="return" id="return_url" value="<?php echo base64_encode(JUri::getInstance()->toString()); ?>" />
+			<?php echo JHtml::_('form.token'); ?>
+		</div>
 	</div>
 
 </form>

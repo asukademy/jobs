@@ -80,6 +80,9 @@ class JobsViewJobHtml extends ItemHtmlView
 		// Prepare setting data
 		$item = $data->item = new Data($data->item);
 
+		// Text
+		$item->text = $item->desc;
+
 		// Link
 		// =====================================================================================
 		$query = array(
@@ -157,16 +160,16 @@ class JobsViewJobHtml extends ItemHtmlView
 		$dispatcher = $this->container->get('event.dispatcher');
 		JPluginHelper::importPlugin('content');
 
-		$item->text = $item->introtext . $item->fulltext;
-		$results = $dispatcher->trigger('onContentPrepare', array('com_jobs.job', &$item, &$data->params, 0));
+		$item->text = "#工作內容\n\n" . $item->desc . "\n\n#應徵方式\n\n" . $item->contact;
+		$results = $dispatcher->trigger('onContentPrepare', array('com_content.article', &$item, &$data->params, 0));
 
-		$results = $dispatcher->trigger('onContentAfterTitle', array('com_jobs.job', &$item, &$data->params, 0));
+		$results = $dispatcher->trigger('onContentAfterTitle', array('com_content.article', &$item, &$data->params, 0));
 		$item->event->afterDisplayTitle = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_jobs.job', &$item, &$data->params, 0));
+		$results = $dispatcher->trigger('onContentBeforeDisplay', array('com_content.article', &$item, &$data->params, 0));
 		$item->event->beforeDisplayContent = trim(implode("\n", $results));
 
-		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_jobs.job', &$item, &$data->params, 0));
+		$results = $dispatcher->trigger('onContentAfterDisplay', array('com_content.article', &$item, &$data->params, 0));
 		$item->event->afterDisplayContent = trim(implode("\n", $results));
 	}
 

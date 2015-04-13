@@ -38,11 +38,6 @@ $grid->registerTableSort();
 <!-- TABLE HEADER -->
 <thead>
 <tr>
-	<!--SORT-->
-	<th width="1%" class="nowrap center hidden-phone">
-		<?php echo $grid->orderTitle(); ?>
-	</th>
-
 	<!--CHECKBOX-->
 	<th width="1%" class="center">
 		<?php echo JHtml::_('grid.checkAll'); ?>
@@ -63,9 +58,14 @@ $grid->registerTableSort();
 		<?php echo $grid->sortTitle('JCATEGORY', 'category.title'); ?>
 	</th>
 
-	<!--ACCESS VIEW LEVEL-->
+	<!--TYPE-->
 	<th width="5%" class="center">
-		<?php echo $grid->sortTitle('JGRID_HEADING_ACCESS', 'viewlevel.title'); ?>
+		<?php echo $grid->sortTitle('類別', 'job.type'); ?>
+	</th>
+
+	<!--COMPANY-->
+	<th width="5%" class="center">
+		<?php echo $grid->sortTitle('公司', 'job.company'); ?>
 	</th>
 
 	<!--CREATED-->
@@ -76,11 +76,6 @@ $grid->registerTableSort();
 	<!--USER-->
 	<th width="10%" class="center">
 		<?php echo $grid->sortTitle('JAUTHOR', 'user.name'); ?>
-	</th>
-
-	<!--LANGUAGE-->
-	<th width="5%" class="center">
-		<?php echo $grid->sortTitle('JGRID_HEADING_LANGUAGE', 'lang.title'); ?>
 	</th>
 
 	<!--ID-->
@@ -112,11 +107,6 @@ $grid->registerTableSort();
 	$grid->setItem($item, $i);
 	?>
 	<tr class="job-row" sortable-group-id="<?php echo $item->catid; ?>">
-		<!-- DRAG SORT -->
-		<td class="order nowrap center hidden-phone">
-			<?php echo $grid->dragSort(); ?>
-		</td>
-
 		<!--CHECKBOX-->
 		<td class="center">
 			<?php echo JHtml::_('grid.id', $i, $item->job_id); ?>
@@ -154,9 +144,14 @@ $grid->registerTableSort();
 			<?php echo $this->escape($item->category_title); ?>
 		</td>
 
-		<!--ACCESS VIEW LEVEL-->
+		<!--TYPE-->
 		<td class="center">
-			<?php echo $this->escape($item->viewlevel_title); ?>
+			<?php echo JText::_('COM_JOBS_TYPE_' . $item->type); ?>
+		</td>
+
+		<!--COMPANY-->
+		<td class="center">
+			<?php echo $this->escape($item->company); ?>
 		</td>
 
 		<!--CREATED-->
@@ -167,11 +162,6 @@ $grid->registerTableSort();
 		<!--USER-->
 		<td class="center">
 			<?php echo $this->escape($item->user_name); ?>
-		</td>
-
-		<!--LANGUAGE-->
-		<td class="center">
-			<?php echo $grid->language(); ?>
 		</td>
 
 		<!--ID-->

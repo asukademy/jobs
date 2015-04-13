@@ -57,10 +57,28 @@ $item = $data->item;
 					<!-- ============================================================================= -->
 					<div class="info">
 						<div class="info-inner">
-							<?php echo ViewHtmlHelper::showInfo($item, 'category_title', 'jcategory', 'folder', Route::_('com_jobs.jobs', array('id' => $item->catid))); ?>
-							<?php echo ViewHtmlHelper::showInfo($item, 'created', 'com_jobs_created', 'calendar'); ?>
-							<?php echo ViewHtmlHelper::showInfo($item, 'modified', 'com_jobs_modified', 'calendar'); ?>
-							<?php echo ViewHtmlHelper::showInfo($item, 'name', 'com_jobs_created_by', 'user'); ?>
+							公司名稱:
+							<?php if ($item->url): ?>
+								<a target="_blank" href="<?php echo $this->escape($item->url); ?>">
+									<?php echo $this->escape($item->company); ?>
+								</a>
+							<?php else: ?>
+								<span class="uk-text-muted">
+									<?php echo $this->escape($item->company); ?>
+								</span>
+							<?php endif; ?>
+
+							|
+
+							薪資水平: <?php echo number_format($item->salary_min, 0); ?> ~ <?php echo number_format($item->salary_max, 0); ?>
+
+							|
+
+							工作地點:
+							<a target="_blank" href="<?php echo 'https://www.google.com.tw/maps/search/' . $this->escape($item->position); ?>">
+								<?php echo $this->escape($item->position); ?>
+							</a>
+
 						</div>
 					</div>
 
@@ -82,6 +100,12 @@ $item = $data->item;
 
 								<div class="text">
 									<?php echo $item->text; ?>
+
+									<h1>地圖</h1>
+
+									<iframe width="100%" height="350" frameborder="0" style="border:0"
+										src="https://www.google.com/maps/embed/v1/place?key=AIzaSyC04nF4KXjfR2VQ0jsFm5vEd9LbyiXqbKw&amp;q=<?php echo $item->position; ?>">
+									</iframe>
 								</div>
 							</div>
 

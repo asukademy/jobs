@@ -73,9 +73,7 @@ class JobsModelJobs extends ListModel
 
 		$queryHelper->addTable('job', '#__jobs_jobs')
 			->addTable('category',  '#__categories', 'job.catid      = category.id')
-			->addTable('user',      '#__users',      'job.created_by = user.id')
-			->addTable('viewlevel', '#__viewlevels', 'job.access     = viewlevel.id')
-			->addTable('lang',      '#__languages',  'job.language   = lang.lang_code');
+			->addTable('user',      '#__users',      'job.created_by = user.id');
 
 		$this->filterFields = array_merge($this->filterFields, $queryHelper->getFilterFields());
 	}

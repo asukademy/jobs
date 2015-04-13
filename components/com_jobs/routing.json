@@ -5,7 +5,7 @@
 	},
 
 	"job": {
-		"pattern": "job/:id/:alias",
+		"pattern": "job/:id",
 		"view" : "job"
 	}
 }

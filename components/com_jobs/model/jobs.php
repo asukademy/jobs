@@ -75,9 +75,7 @@ class JobsModelJobs extends ListModel
 
 		$queryHelper->addTable('job', '#__jobs_jobs')
 			->addTable('category',  '#__categories', 'job.catid      = category.id')
-			->addTable('user',      '#__users',      'job.created_by = user.id')
-			->addTable('viewlevel', '#__viewlevels', 'job.access     = viewlevel.id')
-			->addTable('lang',      '#__languages',  'job.language   = lang.lang_code');
+			->addTable('user',      '#__users',      'job.created_by = user.id');
 
 		$this->filterFields = array_merge($this->filterFields, $queryHelper->getFilterFields());
 	}
@@ -146,7 +144,7 @@ class JobsModelJobs extends ListModel
 
 		// Order
 		// =====================================================================================
-		$orderCol = $params->get('orderby', 'a.ordering');
+		$orderCol = $params->get('orderby', 'job.id');
 		$this->state->set('list.ordering', $orderCol);
 
 		// Order Dir
@@ -172,6 +170,8 @@ class JobsModelJobs extends ListModel
 		$user = $this->container->get('user');
 		$db   = $this->container->get('db');
 		$date = $this->container->get('date');
+
+		$filters = (array) $filters;
 
 		// If no state filter, set published >= 0
 		if (!isset($filters['job.state']) && property_exists($this->getTable(), 'state'))
