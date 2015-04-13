@@ -1,0 +1,11 @@
+{
+	"jobs": {
+		"pattern": "jobs/:id",
+		"view" : "jobs"
+	},
+
+	"job": {
+		"pattern": "job/:id/:alias",
+		"view" : "job"
+	}
+}

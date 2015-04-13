@@ -1,0 +1,9 @@
+{
+	"name" : "smstw/jobs",
+
+	"require" : {
+	},
+
+	"require-dev" : {
+	}
+}
